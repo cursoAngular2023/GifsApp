@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-busqueda',
@@ -6,11 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class BusquedaComponent implements OnInit {
+export class BusquedaComponent {
 
-  constructor() { }
+  @ViewChild( 'txtBuscar') txtBuscar!:ElementRef<HTMLInputElement>;
 
-  ngOnInit(): void {
+  buscar( ){
+    const valor = this.txtBuscar.nativeElement.value;
+    console.log(valor);
+
+    // Borrar la caja de texto después de pulsar intro
+    this.txtBuscar.nativeElement.value = '';
   }
 
 }
