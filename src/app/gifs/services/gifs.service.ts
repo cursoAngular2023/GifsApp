@@ -10,7 +10,6 @@ export class GifsService {
   private apiKey : string = 'KhGxWF3KFMTH94aX4E1Ormp8qaswJHyk';
   private _historial: string[] = [];
   
-  // TODO: Cambiar any por su tipo correspondiente
   public resultados: Gif[] = [];
 
   get historial(){
@@ -22,6 +21,7 @@ export class GifsService {
 
     // obtenemos el historial del localstorage
     this._historial = JSON.parse( localStorage.getItem('historial')!) || [];
+    this.resultados = JSON.parse( localStorage.getItem('resultados')!) || [];
 
   }
 
@@ -45,6 +45,8 @@ export class GifsService {
       .subscribe( (resp: any ) => {
         console.log( resp.data );
         this.resultados = resp.data;
+        // grabar en el localstorage
+        localStorage.setItem('resultados', JSON.stringify( this.resultados ));
       });
 
   }
